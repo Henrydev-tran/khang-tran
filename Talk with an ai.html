@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<marquee class="id"> TALKING AI [ALPHA]</marquee>
+<marquee class="id2">this program still in development</marquee>
+<html>
+    <head>
+        <title>talking with AI (ALPHA)</title>
+    </head>
+    <body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="dialogoverlay"></div>
+    <div class="dialogbox"></div>
+        <button class="StartAI" onclick="Settings()">start AI</button>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <script>
+            /*created by khang tran*/
+/*created by 21 else if element and and still increses because this AI is just on beta version and still upgrading*/
+//this programs still in development...
+
+alert("this is my biggest project, this project just been programmed in 1 day so there will be a lot of bugs, but im still working on them so they will be better, if you want to suggest some feature or more question you would like to have, please comment, also this is created to celebrate that i have 3 certificate, anyway if you like. please give an upvote")
+
+/*"in development code" don't run it yet. im still working on them it will be finish 1 or two days later, so you can access it*/
+/*alert("Version 1.0 whats new on this version?, new to do list, do math, clock, stopwatch");
+               */
+                 function RateMachine(){
+                var Expession = prompt("how do you feel about this Robot? type very unsatisfied, unsatisfied, normal, satisfied, very satisfied");
+                if(Expession == "very unsatisfied" || Expession == "unsatisfied"){
+                    var Problem = prompt("whats wrong with this bot?");
+                    alert("ok, we will trying to fix this problem");
+                    }
+                    else if(Expession == "normal"){
+                        alert("okay");
+                    }
+                    else if(Expression == "satisfied" || Expression == "very satisfied"){
+                        alert("great, thanks!");
+                        Convo();
+                    }
+                    else{
+                        alert("thats not the rate word")
+                    } 
+            }
+function Settings(){
+    var Botname = prompt("Hi, before talking with me can you do for me one thing?, my default name is 'alexa', do you want to rename me?, if not you can type 'default' to keep my default name");
+    if(Botname === "Dick" || Botname === "Fuck" || Botname  === "Bitch" || Botname === "Shit" || Botname === "Crap" || Botname === "dick" || Botname === "fuck" || Botname === "bitch" || Botname === "shit" || Botname === "crap" || Botname === "Penis" || Botname === "penis" || Botname === "Boob" || Botname === "boob" || Botname === "Boobs" || Botname === "boobs"){
+            alert(" Sorry, you can't use words like that!");
+        
+        Settings()
+        }
+    else if(Botname == "default" || Botname == "Default"){Botname = "Alexa"
+    alert("thanks")}
+    else if(Botname == "null"){
+        alert("i need a name!!");
+        Settings();
+    }
+    else{
+    alert("thanks!");
+    }
+    var Yourname = prompt("what would you like me to call you?");
+    if(Yourname === "Dick" || Yourname === "Fuck" || Yourname === "Bitch" || Yourname === "Shit" || Botname === "Crap" || Yourname === "dick" || Yourname === "fuck" || Yourname === "bitch" || Yourname === "shit" || Yourname === "crap" || Yourname === "Penis" || Yourname === "penis" || Yourname === "Boob" || Yourname === "boob" || Yourname === "Boobs" || Yourname === "boobs"){
+            alert(" you can't use words like that!, type another name.");
+        
+        Settings()
+        }
+    else if(Yourname == "null"){
+        Yourname = "user"
+    }
+    alert("hi " + Yourname + " i'm " + Botname + " let's start the chat");
+    Convo();
+function Convo(){
+    var Question = prompt(Botname + " is waiting for you to say something...");
+    if(Question === "Dick" || Question === "Fuck" || Question === "Bitch" || Question === "Shit" || Question  === "Crap" || Question  === "dick" || Question === "fuck" || Question === "bitch" || Question === "shit" || Question === "crap" || Question === "Penis" || Question  === "penis" || Question  === "Boob" || Question === "boob" || Question === "Boobs" || Question === "boobs"){
+            alert(" don't say things like that!");
+        
+        Convo()
+        }
+    else if(Question == "how are you" || Question == "How are you" || Question == "how are you?" || Question == "How are you?"){
+    alert("im great thanks. how are you?")
+        var Answer = prompt("how are you?")
+        if(Answer == "good" || Answer == "Good" || Answer == "great" || Answer == "Great"){
+            alert("well, thats good to hear " + Yourname);
+            }
+            else if(Answer == "not good" || Answer == "Not good"){
+                alert("really?, is there anything i can help?");
+            }
+            else{
+                alert("okay");
+            }
+            Convo();
+            }
+            else if(Question == "hello" || Question == "Hello" || Question == "hi" || Question == "Hi" || Question == "Hey" || Question == "hey"){
+                alert("hi " + Yourname + "! i'm " + Botname + "!");
+            }
+            else if(Question == "how old are you" || Question == "How old are you" || Question == "how old are you?" || Question == "How old are you?"){
+                alert("i'm always here to help you forever!");
+                Convo();
+            }
+            else if(Question == "help" || Question == "Help"){
+                alert("you can type lots of things like: types normal day question, types goodbye, bye or cya to stop chatting with AI. 'bonus' you can type rate to rate this bot.");
+                /*in development code
+                alert("[VERSION 1.0] you can type : make a to do list to make a to do list, to do list to show you the to do listl, do math to do some math, play quiz to play quiz.");*/
+                Convo();
+            }
+            else if(Question == "cya" || Question == "Cya" || Question == "bye" || Question == "Bye" || Question == "goodbye" || Question == "Goodbye"){
+                alert("cya later " + Yourname);
+            }
+            else if(Question == "what are you" || Question == "What are you" || Question == "What are you?" || Question == "what are you?"){
+                alert("i'm an AI")
+            }
+            else if(Question == "who are you" || Question == "Who are you" || Question == "who are you?" || Question == "Who are you?"){
+                alert("i'm " + Botname + " of Course!")
+            }
+            else if(Question == "do you like cartoons" || Question == "Do you like cartoons" || Question == "Do you like cartoons?" || Question == "do you like cartoons?"){
+                alert("Yes, i do!");
+                Convo();
+            }
+            else if(Question == "what cartoon movie    do you like" || Question == "What cartoon movie do you like" || Question == "what cartoon movie do you like?" || Question == "What cartoon movie do you like?"){
+                alert("i like simpsons, what do you like?");
+                prompt("What cartoon movie do you like?");
+                alert("great!");
+                Convo();
+            }
+            else if(Question == "am i fat" || Question == "Am i fat" || Question == "am i fat?" || Question == "Am i fat?"){
+                alert("no, not at all");
+                Convo();
+            }
+            else if(Question == "who created you" || Question == "Who created you" || Question == "who created you?" || Question == "Who created you?"){
+                alert("khang tran user created me!");
+                Convo();
+            }
+            else if(Question == "im going to sleep" || Question == "Im going to sleep" || Question == "i'm going to sleep" || Question == "I'm going to sleep"){
+                alert("well, good night!");
+            }
+            else if(Question == "i have to go" || Question == "I have to go"){
+                alert("goodbye, " + Yourname + "!")
+            }
+            else if(Question == "what is my name" || Question == "What is my name" || Question == "what is my name?" || Question == "What is my name?"){
+                alert("you are " + Yourname + " of course!");
+                Convo();
+            }
+            else if(Question == "stupid" || Question == "Stupid"){
+                alert("im sorry because im not smart enough to answer those question but i have developed only 1 day, so im pretty dumb, if you want suggest some feature please comment!");
+                Convo();
+            } 
+            else if(Question == "how long have you been created" || Question == "How long have you been created" || Question == "How long have you been created?" || Question == "how long have you been created?"){
+                alert("i have been created since 23/2/2020 it has been only 1 day from now!");
+                Convo();
+            }
+            else if(Question == "how long do i have to wait for the next update?" || Question == "How long do i have to wait for the next update?" ){
+                alert("if you're talking about massive update, then 4 days, 3 days for sections update, 2 days for big update, 1 day if it's a normal update");
+                Convo();
+            }
+            else if(Question == "how long does it take to release the original update" || Question == "How long does it take to release the original update"){
+                alert("well. my creator told me that before relasing the original update he will release the alpha update first, the original update will be release when the three sections are done");
+                Convo();
+            }
+            else if(Question == "rate" || Question == "Rate"){
+                 RateMachine();
+            }
+            else if (Question == "what are you doing?" || Question == "What are you doing?"){
+                alert("im talking with you, right now!");
+                Convo();
+            }
+            else if (Question == "what do you think?" || Question == "What do you think?"){
+                alert("thinking the answer to answer to you now!");
+                Convo();
+            }
+            else if(Question == "are you a girl?" || Question == "Are you a girl?"){
+                alert("yes, i am");
+            }
+            else if(Question == "are you alone?" || Question == "Are you alone?"){
+                alert("i think this is my personal information, so dont ask again , okay!");
+                Convo();
+                }
+            else if(Question == "make a to do list" || Question == "Make a to do list"){
+                ToDo();
+            }
+            else if(Question == "good morning" || Question == "Good morning"){
+                alert("morning " + Yourname);
+            }
+            else if(Question == "How's your day?" || Question == "how's your day?"){
+                alert("good, talking with you is always fun!");
+                Convo();
+            }
+            else if(Question == "what have you done today?" || Question == "What have you done today"){
+                alert("today i have talked with you");
+                Convo();
+            }
+            else if(Question == "do you have a friend?" || Question == "Do you have a friend?"){
+                alert("you are my best friend!");
+                
+            }
+            else if(Question == "do you happy today?" || Question == "Do you happy today?"){
+                alert("talking with you is my happinest ;D");
+                Convo();
+            }
+            else if(Question == "where are you from?" || Question == "Where are you from?"){
+                alert("my original is from vietnam and khang tran created me, my birthday is 23/2/2020");
+                Convo();
+            }
+            /*else if(Question == "play quiz" || Question == "Play quiz"){
+            QuizGenerator();
+            }*/
+            /*else if(Question == "Do math" || Question == "do math"){
+                DoMath();
+            }*/
+            else if(Question == "make a to do list" || Question == "Make a to do list"){
+                ListGenerator();
+            }
+            else if(Question == "to do list" || Question == "To do list"){
+                alert(ToDoList);
+                Convo();
+            }
+            else{
+                alert("Im sorry. i dont know how to Answer to that yet, please check if there's missing Question mark or something, maybe you can comment what you want this AI to do so i can make this AI better. or type help for help.")
+                Convo();
+            }
+var ToDoListN = new Array();
+var ToDoListE = new Array();
+var ToDoListME = new Array();
+    function ListGenerator(){
+var DeclareL = prompt("do you really want to run the List Generator?, type yes or no, type help to use some useful help");
+    if(DeclareL == "no" || DeclareL == "No"){
+    alert("ok");
+        Convo();
+    }
+    else if(DeclareL == "help" || DeclareL == "Help"){
+        alert("if you're in this to do list funtion type no or in the nothing to put nothing into the to do object and also bring you back to the Convosation");
+        ListGenerator();
+    }
+    else if(DeclareL == "yes" || DeclareL == "Yes")
+    {
+      ToDoListN[0] = prompt("enter the first to do object into the to do list or type nothing to exit");
+      if(ToDoListN[0] == "nothing" || ToDoListN[0] == "Nothing")
+      {
+          ToDoListN[0] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[1] = prompt("enter the second to do object into the to do list or type nothing to exit");
+      if(ToDoListN[1] == "nothing" || ToDoListN[1] == "Nothing")
+      {
+          ToDoListN[1] = " ";
+          Convo();
+      }
+      else{
+          ToDoListN[2] = prompt("enter the third to do object into the to do list or type nothing to exit");
+      if(ToDoListN[2] == "nothing" || ToDoListN[2] == "Nothing")
+      {
+          ToDoListN[2] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[3] = prompt("enter the fourth to do object into the to do list or type nothing to exit");
+      if(ToDoListN[3] == "nothing" || ToDoListN[3] == "Nothing")
+      {
+          ToDoListN[3] = " ";
+          Convo();
+      }
+      else{
+          ToDoListN[4] = prompt("enter the fifth to do object into the to do list or type nothing to exit");
+      if(ToDoListN[4] == "nothing" || ToDoListN[4] == "Nothing")
+      {
+          ToDoListN[4] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[5] = prompt("enter the sixth to do object into the to do list or type nothing to exit");
+      if(ToDoListN[5] == "nothing" || ToDoListN[5] == "Nothing")
+      {
+          ToDoListN[5] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[6] = prompt("enter the seventh to do object into the to do list or type nothing to exit");
+      if(ToDoList[6] == "nothing" || ToDoListN[6] == "Nothing")
+      {
+          ToDoListN[6] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[7] = prompt("enter the eighth to do object into the to do list or type nothing to exit");
+      if(ToDoListN[7] == "nothing" || ToDoListN[7] == "Nothing")
+      {
+          ToDoListN[7] = " ";
+          Convo();
+      }
+      else{
+           ToDoListN[8] = prompt("enter the nineth to do object into the to do list or type nothing to exit");
+      if(ToDoList[8] == "nothing" || ToDoListN[8] == "Nothing")
+      {
+          ToDoListN[8] = " ";
+          Convo();
+      }
+      else{
+         ToDoListN[9] = prompt("enter the tenth to do object into the to do list or type nothing to exit");
+      if(ToDoList[9] == "nothing" || ToDoListN[9] == "Nothing")
+      {
+          ToDoListN[9] = " ";
+          Convo();
+      }
+      else{
+        ExtendToDoList();
+      }  
+      }
+      }
+      }
+      }
+      } 
+      }
+      } 
+      }
+      }
+      Convo();  
+    }
+    else{
+        alert("type yes, no or help!");
+        ListGenerator();
+    }
+}
+ function ExtendToDoList(){
+         var DeclareI = prompt("the maximum capacity of the to do list is 10 do you want to upgrade it to to do list Extend? type yes or no");
+         if(DeclareI == "no" || DeclareI == "No"){
+             alert("okay");
+             Convo();
+         } 
+         else if(DeclareI == "yes" || DeclareI == "Yes"){
+         
+         }
+         else{
+             alert("please, enter yes or no.")
+         }
+         }
+}
+}
+        </script>
+        <p style="color:white;"><b>please read this first! description: this is only just the ALPHA version, 1.0 sections update will be there soon, and
+1.0.5 more question, 1.1 tasks and css update those will be there soon</b></p>
+    </body>
+</html>
