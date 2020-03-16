@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cube Adventure</title>
+    </head>
+    <body>
+        <canvas id="canvas1" 
+   width="400" height="320"></canvas> 
+<canvas id="LEVELS" height="320" width="400"></canvas>
+<style>
+    /*style here*/
+    /*canvas{
+        border-style:solid;
+    }
+    .changeDirectButton{
+    position:absolute;
+    left:35%;
+        background-color:gray;
+1        margin:7px;
+        color:lightGray;
+        border-width:3px;
+
+        border-height:4px;
+        border-radius:50px;
+    }
+    #directionFacing{
+        font-weight:bolder;
+        position:absolute;
+        left:33%;
+        top:50%;
+    }*/
+</style>
+   <script>
+   var canvas = document.getElementById("canvas1");    
+      const ctx = canvas.getContext("2d");
+function levelsRender(){
+    var LEVELS = document.getElementById("LEVELS");
+    const ctxLevels = LEVELS.getContext("2d");
+    }
+      
+        if(gameLive){
+            canvasRender();
+            levelsRender();
+            objectsRenderer();
+        }
+        
+        //constant
+        const GAME_WIDTH = canvas.width;
+            const GAME_HEIGHT = canvas.height;
+            const LEVELS_WIDTH = LEVELS.width;
+            const LEVELS_HEIGHT = LEVELS.height
+            
+            //game live
+            var gameLive = true;
+      //needed for classes(because i code python a lot)
+      var self = this;
+
+      //needed to know what level you enter
+      var enteredLevel = {
+          level1: false,
+          level2: false,
+          level3: false
+      }
+
+      //needed to create a coming soon board
+      var enteredComingSoonObject = false;
+
+      //position standing
+      var positionStanding = "Main Menu";
+
+      //needed to hide all rect
+      var isAllHidden = false;
+      
+      //levels
+      var levelsIsHidden = true;
+
+      //declare levels
+      var levelColumn = 3
+      var levels = [];
+      for(var c=0; c<levelColumn; c++){
+          levels[c] = {
+          x: 0,
+           y: 110,
+            sizeX: 100,
+            sizeY: 100,
+            padding: 10,
+            offset: 30}
+      }
+
+      //create a confirm screen
+      var cofirmScreen = {
+          x: GAME_WIDTH/2,
+          y: GAME_HEIGHT/2,
+          isHidden: true,
+          playerConfirmed: false,
+          sizeX: 100,
+          sizeY: 100
+      }
+
+      //player object
+      var player = {
+          speed: 2,
+          x: GAME_WIDTH-390,
+          y: GAME_HEIGHT/2-10,
+          //moving boolean
+          isMoving: false,
+          //to tell you what direction face you are facing
+          directionFacing: 1,
+color: "black",
+          sizeX: 25,
+          sizeY: 20
+      };
+      
+      //white blocks
+      var whiteBlocks = {
+          x: 63,
+          y: GAME_HEIGHT/3+16,
+          isHidden: true,
+          sizeX: 75,
+          sizeY: 75
+          
+      }
+
+      //create a play object
+      var playRect = {
+          x: 370,
+          y: 100,
+          isHidden: false,
+          sizeY: 100,
+          sizeX: 20
+      }
+
+      //the select difficulty object
+      var selectDifficulty = {
+          x: 140,
+          y: 10,
+          //isHidden used to create collision and hide it
+          isHidden: false,
+          //this two used to change the color when whe change the diffculty
+          color: "black",
+          difficultySelected: "easy",
+          sizeY: 20,
+          sizeX: 100
+      };
+      
+      //create an obstacle
+     /* var obstacle = {
+          x: 40,
+          y: GAME_HEIGHT/3,
+          isHidden: true,
+          sizeX: 35,
+          sizeY: 25
+      }*/
+      
+      //draw the difficulty
+      var difficulty = {
+          x:120,
+          y:120,
+          isHidden: true,
+          sizeX: 65,
+          sizeY: 65
+      }
+
+      //an exit object to let you exit the room
+      var exitRect = {
+          x: 10,
+          y: 300,
+          isHidden: true,
+          sizeY: 15,
+          sizeX: 85
+      }
+      
+      //create an AI and you can activate it if you want
+     /* function playAI(){
+      var PlayAI = {
+          speed: player.speed,
+          x: player.x,
+          y: player.y,
+          color: player.color,
+          sizeX: player.sizeX,
+          sizeY: player.sizeY
+      }
+      function drawplayerAI(){
+          ctx.beginPath();
+          ctx.rect(PlayAI.x, PlayAI.y, PlayAI.sizeX, PlayAI.sizeY);
+          ctx.fillStyle = PlayAI.color;
+          ctx.fill();
+          ctx.closePath();
+      }
+      var AItasks = [];
+      AItasks[0] = "go to the play rect";
+      var runAI = function(){
+         PlayAI.x += speed;
+         if(playAI.x+PlayAI.sizeX >= playRect.x){
+             AItasks[0] = "completed";
+         }
+      }
+      }*/
+      
+      //create canvas eventListener
+      canvas.addEventListener("touchstart", touchHandling);
+      canvas.addEventListener("touchend", touchEndHandling);
+
+      //touch handling function
+      function touchHandling(){
+          player.isMoving = true;
+      }
+      function touchEndHandling(){
+          player.isMoving = false;
+      }
+      
+      //change the direction you are facing
+      function controlsHandling(){
+      if(player.directionFacing <= 4){
+          player.directionFacing += 1;
+          }
+          if(player.directionFacing == 5){
+              player.directionFacing = 1;
+          }
+      }
+
+      //draw the player
+      function drawPlayer(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.beginPath();
+          ctx.rect(player.x, player.y, player.sizeX, player.sizeY);
+          ctx.fillStyle = player.color;
+          ctx.fill();
+          ctx.closePath();
+      }
+      
+      //create the coming soon board function, if there's any coming soon feature, this will appear
+      var comingSoonBoard = function(){
+      if(enteredComingSoonObject){
+          ctx.font = "50px Arial";
+          ctx.fillStyle="black";
+          ctx.fillText("coming soon...", 30, 180);
+          ctx.font = "20px Arial";
+          ctx.fillText("please wait", 130, 220);
+          }
+          }
+          
+          
+          function levels_update(){
+          if(enteredLevel.level1){
+          exitRect.isHidden = true;
+                player.x = 195;
+                player.y = 300;
+                }
+          }
+
+          function level1_obstacles_draw(){
+          if(enteredLevel.level1){
+              ctx.rect(GAME_WIDTH/3, 0, levels[0].sizeX+35, GAME_HEIGHT);
+              ctx.fillStyle = "gray";
+              ctx.fill();
+              }
+          }
+      //draw levels
+      function drawLevels(){
+          for(var c=0; c<levelColumn; c++){
+          if(levelsIsHidden == false){
+              var levelX = (c*(levels[c].sizeX+levels[c].padding))+levels[c].offset+20;
+              levels[c].x = levelX;
+              ctx.beginPath();
+              ctx.rect(levels[c].x, levels[c].y, levels[c].sizeX, levels[c].sizeY);
+              ctx.fillStyle = "darkGray";
+              ctx.fill();
+              ctx.closePath();
+              }
+          }
+      }
+
+     /* //create a triangle to point where whe look
+      function drawTri(){
+          ctx.beginPath();
+          ctx.lineTo();
+          ctx.moveTo();
+          ctx.moveTo();
+          ctx.closePath();
+      }*/
+
+      //create a exit rect
+      function drawExit_Rect(){
+          if(!exitRect.isHidden){
+              ctx.beginPath();
+              ctx.rect(exitRect.x, exitRect.y, exitRect.sizeX, exitRect.sizeY);
+              ctx.fillStyle = "red";
+              ctx.fill();
+              ctx.closePath();
+              ctx.font = "18px Arial";
+              ctx.fillStyle = "black";
+              ctx.fillText("e  x   i   t", 20, 313);
+          }
+      }
+      
+      //white blocks
+      function drawWhite_blocks(){
+      if(!whiteBlocks.isHidden){
+          ctx.beginPath();
+          ctx.rect(whiteBlocks.x, whiteBlocks.y, whiteBlocks.sizeX, whiteBlocks.sizeY);
+          ctx.rect(whiteBlocks.x+110, whiteBlocks.y, whiteBlocks.sizeX, whiteBlocks.sizeY);
+          ctx.rect(whiteBlocks.x+220, whiteBlocks.y, whiteBlocks.sizeX, whiteBlocks.sizeY);
+          ctx.fillStyle = "white";
+          ctx.fill();
+          ctx.closePath();
+          ctx.font = "20px Arial";
+          ctx.fillStyle = "black";
+          ctx.fillText("Level 1", whiteBlocks.x+9, whiteBlocks.y+42);
+          ctx.fillText("Level 2", whiteBlocks.x+116, whiteBlocks.y+42);
+          ctx.fillText("Level 3", whiteBlocks.x+227, whiteBlocks.y+42);
+          }
+      }
+
+      //draw the play object
+      function drawPlayRect(){
+          if(!playRect.isHidden){
+              ctx.beginPath();
+              ctx.rect(playRect.x, playRect.y, playRect.sizeX, playRect.sizeY);
+              ctx.fillStyle = "green";
+              ctx.fill();
+              ctx.closePath();
+              ctx.font = "18px Arial";
+              ctx.fillStyle = "black";
+              ctx.fillText("P", playRect.x+5, playRect.y+30);
+              ctx.fillText("L", playRect.x+5.50, playRect.y+47);
+              ctx.fillText("A", playRect.x+5, playRect.y+65);
+              ctx.fillText("Y", playRect.x+5, playRect.y+85);
+          }
+      }
+
+      //generate level1
+      /*function level_1_generator(){
+          var drawObstacles = function(){
+              ctx.beginPath();
+              ctx.rect(obstacle.x, obstacle.y, obstacle.sizeX, obstacle.sizeY);
+              ctx.fillStyle = "darkGray";
+              ctx.fill();
+              ctx.closePath();
+          }
+      }*/
+
+      //create the selectDifficulty rect
+      function draw_selectDifficulty_Rect(){
+      if(!selectDifficulty.isHidden){
+          ctx.beginPath();
+          ctx.rect(selectDifficulty.x, selectDifficulty.y, selectDifficulty.sizeX, selectDifficulty.sizeY);
+          ctx.fillStyle = selectDifficulty.color;
+          ctx.fill();
+          ctx.closePath();
+          ctx.font = "13px Arial";
+          ctx.fillStyle="black";
+          ctx.fillText("change difficulty", 142, 22)
+          }
+      }
+
+      //draw difficuties
+/*function drawDifficulties(){
+    ctx.beginPath();
+    ctx.rect(difficulty.x, difficulty.y, difficulty.sizeX, difficulty.sizeY);
+    ctx.fillStyle = "darkGray";
+    ctx.rect(difficulty.x+20, difficulty.y+20, difficulty.sizeX, difficulty.sizeY);
+    ctx.fill();
+    ctx.closePath();
+}*/
+
+      //update the game
+      if(gameLive){
+      function update(){
+          drawPlayer();
+          /*drawTri();*/
+          draw_selectDifficulty_Rect();
+          /*drawDifficulties();*/
+          drawExit_Rect();
+          comingSoonBoard();
+          drawPlayRect();
+          drawLevels();
+          drawWhite_blocks();
+          //you can't move over the game
+if(positionStanding != "level1" || positionStanding != "level2" || positionStanding != "level3"){
+          if(player.x + player.sizeX < GAME_WIDTH && player.directionFacing == 1){
+          if(player.isMoving){
+              player.x = player.x + player.speed;
+              }
+              }
+              if(player.x >= 1 && player.directionFacing == 2){
+              if(player.isMoving){
+                  player.x -= player.speed;
+                  }
+              }
+
+              if(player.y >= 1 && player.directionFacing == 3){
+                  if(player.isMoving){
+                      player.y -= player.speed;
+                  }
+              }
+              if(player.y + player.sizeY < GAME_HEIGHT && player.directionFacing == 4){
+              if(player.isMoving){
+                  player.y += player.speed
+                  }
+              }
+}
+if(positionStanding == "level1"){
+   // if
+}
+              //to make all rect hidden
+              if(isAllHidden){
+                  selectDifficulty.isHidden = true;
+                  playRect.isHidden = true;
+                  exitRect.isHidden = false;
+              }
+              if(!isAllHidden){
+                  selectDifficulty.isHidden = false;
+                  playRect.isHidden = false;
+                  exitRect.isHidden = true;
+              }
+              directionUpdate();
+
+        //check your collision with the object
+if(!selectDifficulty.isHidden){
+if (player.x < selectDifficulty.x + selectDifficulty.sizeX && player.x + player.sizeX > selectDifficulty.x && player.y < selectDifficulty.y + selectDifficulty.sizeY && player.sizeY + player.y > selectDifficulty.y) { 
+            
+            isAllHidden = true;
+            positionStanding = "select difficulty room";
+            enteredComingSoonObject = true;
+}
+}
+/*
+if(PlayAI.x < playRect.x + exitRect.sizeX && PlayAI.x + PlayAI.sizeX > exitRect.x && PlayAI.y < playRect.y + playRect.sizeY && PlayAI.sizeY + PlayAI > playRect.y){
+    
+}
+*/
+        if(!exitRect.isHidden){
+        if (player.x < exitRect.x + exitRect.sizeX && player.x + player.sizeX > exitRect.x && player.y < exitRect.y + exitRect.sizeY && player.sizeY + player.y > exitRect.y) {
+if(positionStanding == "level1" || positionStanding == "level2" || positionStanding == "level3"){
+    levelsIsHidden = false;
+    whiteBlocks.isHidden = false;
+    player.x = GAME_WIDTH/2;
+    player.y = 20;
+    enteredComingSoonObject = false;
+    positionStanding = "play room";
+}
+else{
+            enteredComingSoonObject = false;
+            isAllHidden = false;
+            levelsIsHidden = true;
+            whiteBlocks.isHidden = true;
+            player.x = GAME_WIDTH/2;
+            player.y = GAME_HEIGHT/2;
+            }
+        }
+}
+//change the color when whe change the difficulty
+if(selectDifficulty.difficultySelected == "easy"){
+              selectDifficulty.color = "blue";
+          }
+          if(selectDifficulty.difficultySelected == "normal"){
+              selectDifficulty.color = "green";
+          }
+          if(selectDifficulty.difficultySelected == "hard"){
+              selectDifficulty.color = "orange";
+          }
+          if(selectDifficulty.difficultySelected == "harder"){
+              selectDifficulty.color = "lightRed";
+          }
+          if(selectDifficulty.difficultySelected == "insane"){
+              selectDifficulty.color = "purple";
+          }
+          if(selectDifficulty.difficultySelected == "extreme"){
+              selectDifficulty.color = "darkRed";
+          }
+if(!levelsIsHidden){
+        if (player.x < levels[0].x + levels[0].sizeX && player.x + player.sizeX > levels[0].x && player.y < levels[0].y + levels[0].sizeY && player.sizeY + player.y > levels[0].y){
+            levelsIsHidden = true;
+            whiteBlocks.isHidden = true;
+            enteredLevel.level1 = true;
+            positionStanding = "level1";
+            exitRect.isHidden = true;
+        } 
+        if (player.x < levels[1].x + levels[1].sizeX && player.x + player.sizeX > levels[1].x && player.y < levels[1].y + levels[1].sizeY && player.sizeY + player.y > levels[1].y){
+            levelsIsHidden = true;
+            whiteBlocks.isHidden = true;
+            enteredComingSoonObject = true;
+            enteredLevel.level2 = true;
+            positionStanding = "level2";
+        }
+        if (player.x < levels[2].x + levels[2].sizeX && player.x + player.sizeX > levels[2].x && player.y < levels[2].y + levels[2].sizeY && player.sizeY + player.y > levels[2].y){
+            levelsIsHidden = true;
+            whiteBlocks.isHidden = true;
+            enteredComingSoonObject = true;
+            enteredLevel.level3 = true;
+            positionStanding = "level3";
+        }
+        }
+        if(!playRect.isHidden){
+            if (player.x < playRect.x + playRect.sizeX && player.x + player.sizeX > playRect.x && player.y < playRect.y + playRect.sizeY && player.sizeY + player.y > playRect.y){
+           isAllHidden = true;
+           levelsIsHidden = false;
+           whiteBlocks.isHidden = false;
+           player.x = GAME_WIDTH/2;
+           player.y = 20;
+           positionStanding = "play room"
+        }
+        }
+      }
+
+      //update you the direction you are facing
+    function directionUpdate(){
+      var directionString = "";
+if(positionStanding != "level1"){
+      if(player.directionFacing == 1){
+      directionString = "east";
+      }
+      if(player.directionFacing == 2){
+          directionString = "west";
+      }
+      if(player.directionFacing == 3){
+          directionString = "north";
+      }
+      if(player.directionFacing == 4){
+          directionString = "south";
+      }
+}
+if(player.directionFacing == 7){
+    directionString = "right";
+}
+if(player.directionFacing == 8){
+    directionString = "left";
+}
+      document.getElementById("directionFacing").innerHTML = "Direction facing: " + directionString;
+      }
+      }
+function randomColor(){
+    player.color = "#"+((1<<24)*Math.random()|0).toString(16);
+}
+      //update every 10 milisecond
+      setInterval(update, 10);
+setInterval(randomColor, 250);
+setInterval(levels_update, 10);
+
+      </script>
+      <button class="changeDirectButton" onclick="controlsHandling()">change direction</button>
+      <p id="directionFacing"></p>
+    </body>
+</html>
